@@ -1,0 +1,17 @@
+[Term]
+id: GO:0006047
+name: UDP-N-acetylglucosamine metabolic process
+namespace: biological_process
+def: "The chemical reactions and pathways involving UDP-N-acetylglucosamine, a substance composed of N-acetylglucosamine, a common structural unit of oligosaccharides, in glycosidic linkage with uridine diphosphate." [GOC:ai]
+subset: gosubset_prok
+synonym: "UDP-N-acetylglucosamine metabolism" EXACT []
+is_a: GO:0006040 ! amino sugar metabolic process
+is_a: GO:0009225 ! nucleotide-sugar metabolic process
+
+[Term]
+id: GO:0006048
+name: UDP-N-acetylglucosamine biosynthetic process
+namespace: biological_process
+def: "The chemical reactions and pathways resulting in the formation of UDP-N-acetylglucosamine, a substance composed of N-acetylglucosamine, a common structural unit of oligosaccharides, in glycosidic linkage with uridine diphosphate." [GOC:ai]
+subset: gosubset_prok
+
