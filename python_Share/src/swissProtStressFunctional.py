@@ -36,7 +36,7 @@ def Prot_Dictionary (Blast_File):
     return Swiss_Prot_Dictionary
 
 
-Blast_File = open("/scratch/RNASeq/blastp.outfmt6")
+Blast_File = open("../data/blastp.outfmt6")
 Swiss_Prot_Dictionary = Prot_Dictionary(Blast_File)
 # close blast read file
 Blast_File.close()
@@ -56,7 +56,7 @@ def Tuple_To_Tab (Tuple_Line):
     return "\t".join(Tuple_Line)
         
 # Create a list of DE lines
-DE_File = open("/scratch/RNASeq/diffExpr.P1e-3_C2.matrix")
+DE_File = open("../data/diffExpr.P1e-3_C2.matrix")
 List_DE_Lines = map(Tuple_Create, DE_File.readlines())
 DE_File.close()
 
@@ -64,6 +64,6 @@ DE_File.close()
 List_Tabbed_DE = map(Tuple_To_Tab, List_DE_Lines)
 
 # Print to output file, merging lines on \n, and tuples on \t
-Output = open("swissProtStressData.txt", "w")
+Output = open("../intermediate_files/swissProtStressData.txt", "w")
 Output.write("\n".join(map(str, List_Tabbed_DE))+"\n")
 Output.close()

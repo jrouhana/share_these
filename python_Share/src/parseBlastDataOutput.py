@@ -5,8 +5,6 @@ Created on Aug 6, 2017
 '''
 import re
 
-###NOTE THAT FILE WAS PULLING DATA OFF A SERVER, WHICH IT DOES NOT HAVE ACCESS TO HERE###
-
 # Class for blast objects
 class BLAST(object):
     def __init__(self, blast_line):
@@ -25,7 +23,7 @@ def blast_identity(blast_object):
     return(blast_object.pident > 95)
     
 # Create list of BLAST objects
-blast_file = open("/scratch/RNASeq/blastp.outfmt6")
+blast_file = open("../data/blastp.outfmt6")
 list_blast_objects = [BLAST(line)for line in blast_file.readlines()]
 blast_file.close
 
@@ -45,20 +43,22 @@ class MATRIX(object):
         #If transcript in dictionary, replace with protein
         if self.protein in blast_dictionary:
             self.protein = blast_dictionary.get(self.protein)
-        self.ds = float(matrix_matches.group("ds"))
-        self.hs = float(matrix_matches.group("hs"))
-        self.log = float(matrix_matches.group("log"))
-        self.plat = float(matrix_matches.group("plat"))
+        self.ds = str(matrix_matches.group("ds"))
+        self.hs = str(matrix_matches.group("hs"))
+        self.log = str(matrix_matches.group("log"))
+        self.plat = str(matrix_matches.group("plat"))
 
 # Create a list of DE objects
-de_file = open("/scratch/RNASeq/diffExpr.P1e-3_C2.matrix")
-list_de_objects = [MATRIX(line) for line in de_file.readlines()]
+de_file = open("../data/diffExpr.P1e-3_C2.matrix")
+
+list_de_objects = [MATRIX(line) for line in de_file.readlines()[:]]
 de_file.close()
 
 # Output file
-write_file = open("dataOutput.txt", "w")
+write_file = open("../intermediate_files/dataOutput.txt", "w")
 
 # Print output
 for de_object in list_de_objects:
-        write_file.write(de_object.protein + "\t" + de_object.ds + "\t" + de_object.hs + "\t" + de_object.log + "\t" + de_object.plat + "\n")
+        write_file.write(de_object.protein + "\t" + de_object.ds +
+         "\t" + de_object.hs + "\t" + de_object.log + "\t" + de_object.plat + "\n")
 write_file.close()

@@ -7,8 +7,6 @@ Created on Jul 17, 2017
 import re
 
 # Define class for GO objects
-# Name left without underscore to differentiate
-# That this is a class, not an object
 class GOTermRecord(object):
     # Constructor
     def __init__(self, Record):
@@ -58,7 +56,7 @@ def Parse_GO_File(GO_File="../data/go-basic.obo"):
     return (GO_Dictionary)
 
 # Function to print output
-def Print_GO_File(output_file="../outFiles/parsedGO.txt"):
+def Print_GO_File(output_file="../intermediate_files/parsedGO.txt"):
     # Open output file for writing
     GO_Output = open(output_file, "w")
     GO_Dictionary = Parse_GO_File()
