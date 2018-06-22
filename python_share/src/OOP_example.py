@@ -7,6 +7,8 @@ Updated June 21, 2018
 # Module for handling Regex
 import os
 import re
+from __init__ import GOTermRecord
+
 
 # Make sure input file exists
 go_file = "../data/go-basic.obo"
@@ -24,35 +26,6 @@ out_dir = "../output/"
 if not os.path.exists(out_dir):
     os.makedirs(out_dir)
 
-# Define class for GO objects
-class GOTermRecord(object):
-    # Constructor
-    def __init__(self, Record):
-        # Regex for most terms
-        GO_Matches = re.search(r"""^id:\s(?P<id>.*?)\n
-                                ^name:\s(?P<name>.*?\n)
-                                ^namespace:\s(?P<namespace>.*?\n)""", Record, re.M | re.S | re.X)
-        
-        # Regex for Isas matches
-        GO_Isas_Matches = re.findall(r"^is_a:\s(?P<isa>.*?\n)", Record, re.M | re.S | re.X)
-        
-        # Define attributes 
-        self.GO_Id = GO_Matches.group("id")
-        GO_Name = GO_Matches.group("name")
-        GO_Namespace = GO_Matches.group("namespace")
-        if GO_Isas_Matches:
-            # If the list is not empty, then
-            GO_Isas_String = "\t".join(GO_Isas_Matches)
-            self.Value_Seq = (GO_Namespace, GO_Name, GO_Isas_String)
-        else: 
-            self.Value_Seq = (GO_Namespace, GO_Name)
-
-    # Method to return proper print output
-    def Return_All(self):
-        # Format for print
-        Value = "\t".join(self.Value_Seq) 
-        GO_Return = str(self.GO_Id + "\t" + Value + "\t\n")
-        return(self.GO_Id, GO_Return)
 
 # Splits GO file into records to pass into 
 # class builder. Defaults to "go-basic.obo"
